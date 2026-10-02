@@ -1,0 +1,1281 @@
+# FRONTEND — SCHOOL MANAGEMENT SYSTEM
+
+Build the complete **School Management System frontend** as an independent React application.
+
+```text
+school-management-system/
+├── frontend/
+└── backend/          # Backend will be developed separately
+```
+
+**This phase must create ONLY `frontend/`. Do not create backend code inside it.**
+
+## 1. Technology
+
+Use:
+
+```text
+React + Vite
+JavaScript
+Tailwind CSS
+Framer Motion
+Lucide React
+React Router DOM
+Axios
+Context API
+React Hook Form
+```
+
+Use reusable components, clean architecture, responsive design, and no unnecessary dependencies.
+
+## 2. Frontend Structure
+
+```text
+frontend/
+├── public/
+│   ├── favicon.ico
+│   ├── logo.png
+│   └── images/
+├── src/
+│   ├── assets/
+│   │   ├── images/
+│   │   ├── icons/
+│   │   └── animations/
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Button.jsx
+│   │   │   ├── Input.jsx
+│   │   │   ├── Select.jsx
+│   │   │   ├── Textarea.jsx
+│   │   │   ├── DatePicker.jsx
+│   │   │   ├── Modal.jsx
+│   │   │   ├── ConfirmDialog.jsx
+│   │   │   ├── Badge.jsx
+│   │   │   ├── Avatar.jsx
+│   │   │   ├── Loader.jsx
+│   │   │   ├── Skeleton.jsx
+│   │   │   ├── EmptyState.jsx
+│   │   │   ├── ErrorState.jsx
+│   │   │   ├── Pagination.jsx
+│   │   │   ├── SearchInput.jsx
+│   │   │   ├── FilterDropdown.jsx
+│   │   │   └── PageHeader.jsx
+│   │   ├── layout/
+│   │   │   ├── AdminLayout.jsx
+│   │   │   ├── TeacherLayout.jsx
+│   │   │   ├── ParentLayout.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── MobileSidebar.jsx
+│   │   │   ├── TopNavbar.jsx
+│   │   │   └── Breadcrumb.jsx
+│   │   ├── dashboard/
+│   │   ├── charts/
+│   │   ├── student/
+│   │   ├── teacher/
+│   │   ├── parent/
+│   │   ├── academic/
+│   │   ├── attendance/
+│   │   │   ├── student/
+│   │   │   └── teacher/
+│   │   ├── leave/
+│   │   ├── fees/
+│   │   ├── exams/
+│   │   ├── results/
+│   │   ├── timetable/
+│   │   ├── homework/
+│   │   ├── assignments/
+│   │   ├── study-material/
+│   │   ├── lesson-plan/
+│   │   ├── notices/
+│   │   ├── transport/
+│   │   ├── library/
+│   │   ├── documents/
+│   │   ├── notifications/
+│   │   └── reports/
+│   ├── pages/
+│   │   ├── auth/
+│   │   │   ├── Login.jsx
+│   │   │   ├── ForgotPassword.jsx
+│   │   │   ├── ResetPassword.jsx
+│   │   │   └── Unauthorized.jsx
+│   │   ├── admin/
+│   │   │   ├── AdminDashboard.jsx
+│   │   │   ├── students/
+│   │   │   ├── teachers/
+│   │   │   ├── parents/
+│   │   │   ├── academics/
+│   │   │   ├── attendance/
+│   │   │   ├── fees/
+│   │   │   ├── exams/
+│   │   │   ├── results/
+│   │   │   ├── timetable/
+│   │   │   ├── homework/
+│   │   │   ├── notices/
+│   │   │   ├── transport/
+│   │   │   ├── library/
+│   │   │   ├── reports/
+│   │   │   ├── audit/
+│   │   │   └── settings/
+│   │   ├── teacher/
+│   │   │   ├── TeacherDashboard.jsx
+│   │   │   ├── MyProfile.jsx
+│   │   │   ├── MyAttendance.jsx
+│   │   │   ├── StudentAttendance.jsx
+│   │   │   ├── MyClasses.jsx
+│   │   │   ├── MySubjects.jsx
+│   │   │   ├── Homework.jsx
+│   │   │   ├── Assignments.jsx
+│   │   │   ├── StudyMaterial.jsx
+│   │   │   ├── LessonPlans.jsx
+│   │   │   ├── Exams.jsx
+│   │   │   ├── MarksEntry.jsx
+│   │   │   ├── Timetable.jsx
+│   │   │   ├── Notices.jsx
+│   │   │   ├── LeaveApplication.jsx
+│   │   │   └── Notifications.jsx
+│   │   └── parent/
+│   │       ├── ParentDashboard.jsx
+│   │       ├── MyProfile.jsx
+│   │       ├── MyChildren.jsx
+│   │       ├── ChildProfile.jsx
+│   │       ├── Attendance.jsx
+│   │       ├── Homework.jsx
+│   │       ├── Assignments.jsx
+│   │       ├── StudyMaterial.jsx
+│   │       ├── Timetable.jsx
+│   │       ├── Exams.jsx
+│   │       ├── Results.jsx
+│   │       ├── Fees.jsx
+│   │       ├── Payments.jsx
+│   │       ├── Notices.jsx
+│   │       ├── LeaveApplications.jsx
+│   │       ├── Transport.jsx
+│   │       ├── Library.jsx
+│   │       ├── Documents.jsx
+│   │       └── Notifications.jsx
+│   ├── routes/
+│   │   ├── AppRoutes.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   ├── AdminRoute.jsx
+│   │   ├── TeacherRoute.jsx
+│   │   └── ParentRoute.jsx
+│   ├── context/
+│   │   ├── AuthContext.jsx
+│   │   ├── NotificationContext.jsx
+│   │   └── ThemeContext.jsx
+│   ├── hooks/
+│   │   ├── useAuth.js
+│   │   ├── useApi.js
+│   │   ├── useDebounce.js
+│   │   ├── usePagination.js
+│   │   ├── useModal.js
+│   │   └── useGeolocation.js
+│   ├── services/
+│   │   ├── api.js
+│   │   ├── auth.api.js
+│   │   ├── student.api.js
+│   │   ├── teacher.api.js
+│   │   ├── parent.api.js
+│   │   ├── academic.api.js
+│   │   ├── attendance.api.js
+│   │   ├── teacherAttendance.api.js
+│   │   ├── leave.api.js
+│   │   ├── fee.api.js
+│   │   ├── exam.api.js
+│   │   ├── result.api.js
+│   │   ├── timetable.api.js
+│   │   ├── homework.api.js
+│   │   ├── assignment.api.js
+│   │   ├── studyMaterial.api.js
+│   │   ├── lessonPlan.api.js
+│   │   ├── notice.api.js
+│   │   ├── transport.api.js
+│   │   ├── library.api.js
+│   │   ├── document.api.js
+│   │   ├── notification.api.js
+│   │   └── report.api.js
+│   ├── utils/
+│   │   ├── constants.js
+│   │   ├── roles.js
+│   │   ├── permissions.js
+│   │   ├── validators.js
+│   │   ├── dateUtils.js
+│   │   ├── formatters.js
+│   │   ├── fileUtils.js
+│   │   └── errorHandler.js
+│   ├── config/appConfig.js
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── .env
+├── .env.example
+├── .gitignore
+├── index.html
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+├── postcss.config.js
+└── README.md
+```
+
+## 3. Authentication
+
+There are exactly **3 roles**:
+
+```text
+Admin
+Teacher
+Parent
+```
+
+**Never create Student Login.**
+
+Login UI:
+
+```text
+School Logo
+School Management System
+[ Admin ] [ Teacher ] [ Parent ]
+Email
+Password
+[ Login ]
+Forgot Password?
+```
+
+Students are data entities managed through Admin, Teacher and Parent portals.
+
+## 4. Routes
+
+### Common
+
+```text
+/login
+/forgot-password
+/reset-password
+/unauthorized
+```
+
+### Admin
+
+```text
+/admin/dashboard
+/admin/students
+/admin/students/add
+/admin/students/:id
+/admin/teachers
+/admin/parents
+/admin/academics
+/admin/attendance/students
+/admin/attendance/teachers
+/admin/fees
+/admin/exams
+/admin/results
+/admin/timetable
+/admin/homework
+/admin/notices
+/admin/transport
+/admin/library
+/admin/reports
+/admin/audit-logs
+/admin/settings
+```
+
+### Teacher
+
+```text
+/teacher/dashboard
+/teacher/profile
+/teacher/attendance
+/teacher/student-attendance
+/teacher/classes
+/teacher/subjects
+/teacher/homework
+/teacher/assignments
+/teacher/study-material
+/teacher/lesson-plans
+/teacher/exams
+/teacher/marks
+/teacher/timetable
+/teacher/notices
+/teacher/leave
+/teacher/notifications
+```
+
+### Parent
+
+```text
+/parent/dashboard
+/parent/profile
+/parent/children
+/parent/children/:id
+/parent/attendance
+/parent/homework
+/parent/assignments
+/parent/study-material
+/parent/timetable
+/parent/exams
+/parent/results
+/parent/fees
+/parent/payments
+/parent/notices
+/parent/leave
+/parent/transport
+/parent/library
+/parent/documents
+/parent/notifications
+```
+
+## 5. Role Protection
+
+Create:
+
+```text
+ProtectedRoute
+AdminRoute
+TeacherRoute
+ParentRoute
+```
+
+Flow:
+
+```text
+Not authenticated → /login
+Authenticated → Check Role
+Admin → /admin/*
+Teacher → /teacher/*
+Parent → /parent/*
+```
+
+Unauthorized role access must show `Unauthorized.jsx`.
+
+Frontend authorization is for UI/UX only; backend will independently enforce permissions.
+
+## 6. Admin Portal
+
+Dashboard:
+
+```text
+Students
+Teachers
+Parents
+Classes
+Sections
+Today's Attendance
+Present/Absent/Late
+Fee Collection
+Pending Fees
+Upcoming Exams
+Recent Notices
+Admissions
+Payments
+Activities
+```
+
+Charts:
+
+```text
+Student Statistics
+Attendance
+Fees
+Exam Performance
+```
+
+Admin modules:
+
+```text
+Students
+Teachers
+Parents
+Academic Management
+Student Attendance
+Teacher Attendance
+Fees & Accounts
+Exams
+Results
+Timetable
+Homework
+Notices
+Transport
+Library
+Reports
+Audit Logs
+Settings
+```
+
+## 7. Teacher Portal
+
+Teacher modules:
+
+```text
+Dashboard
+My Profile
+My Attendance
+Student Attendance
+My Classes
+My Subjects
+Homework
+Assignments
+Study Material
+Lesson Plans
+Exams
+Marks Entry
+Timetable
+Notices
+Leave Application
+Notifications
+```
+
+Teacher only accesses assigned classes, sections and subjects.
+
+## 8. Teacher Self-Attendance + Location
+
+Teacher opens:
+
+```text
+/teacher/attendance
+```
+
+Display:
+
+```text
+Today's Attendance
+Status: Not Marked
+📍 Location Required
+[ Mark My Attendance ]
+```
+
+On click, use:
+
+```javascript
+navigator.geolocation.getCurrentPosition()
+```
+
+Capture:
+
+```text
+latitude
+longitude
+accuracy
+timestamp
+```
+
+### Current Rule
+
+```text
+ANY LOCATION → Attendance Allowed
+             → Location Captured
+             → Location Sent To Backend
+```
+
+Currently:
+
+```text
+NO GEOFENCING
+NO SCHOOL-RADIUS VALIDATION
+NO LOCATION-BASED REJECTION
+```
+
+API file:
+
+```text
+src/services/teacherAttendance.api.js
+```
+
+Request:
+
+```json
+{
+  "status": "Present",
+  "latitude": 26.8467,
+  "longitude": 80.9462,
+  "accuracy": 15,
+  "locationTimestamp": "2026-10-02T08:30:00.000Z",
+  "remarks": ""
+}
+```
+
+Do **not** send teacher ID. Identify the teacher through authentication.
+
+Location states:
+
+```text
+Detecting location...
+Location detected ✓
+Permission denied → ask user to enable location
+Unavailable → ask user to check GPS/location
+Timeout → allow retry
+Unsupported → show browser support error
+```
+
+Never silently mark attendance if location permission fails.
+
+## 9. Student Attendance
+
+Student attendance is separate from teacher self-attendance.
+
+```text
+Teacher
+ → Assigned Class
+ → Assigned Section
+ → Students
+ → Mark Attendance
+```
+
+Statuses:
+
+```text
+Present
+Absent
+Late
+Half Day
+```
+
+Features:
+
+```text
+Class
+Section
+Date
+Student List
+Mark Status
+Remarks
+Mark All Present
+Reset
+Save
+```
+
+Prevent duplicate submissions.
+
+## 10. Parent Portal
+
+Parent modules:
+
+```text
+Dashboard
+My Profile
+My Children
+Attendance
+Homework
+Assignments
+Study Material
+Timetable
+Exams
+Results
+Fees
+Payments
+Notices
+Leave
+Transport
+Library
+Documents
+Notifications
+```
+
+Multiple children must be supported:
+
+```text
+Child Selector
+├── Child 1 — Class 5-A
+└── Child 2 — Class 8-B
+```
+
+All information must correspond to the selected child.
+
+## 11. Student Management
+
+Admin features:
+
+```text
+Search
+Filter
+Sort
+Pagination
+Add
+Edit
+View
+Deactivate
+```
+
+Student data:
+
+```text
+Personal Information
+Contact
+Parent/Guardian
+Class/Section
+Roll Number
+Documents
+Transport
+Previous School
+Attendance
+Homework
+Assignments
+Exams
+Results
+Fees
+Library
+```
+
+## 12. Teacher & Parent Management
+
+Teacher:
+
+```text
+Add/Edit/View
+Activate/Deactivate
+Employee ID
+Classes
+Sections
+Subjects
+Attendance
+Leave
+Documents
+Timetable
+```
+
+Parent:
+
+```text
+Add/Edit/View
+Activate/Deactivate
+Link Children
+View Authorized Children
+```
+
+## 13. Fees
+
+Admin:
+
+```text
+Fee Dashboard
+Fee Structure
+Student Fees
+Payments
+Pending/Overdue Fees
+Receipts
+```
+
+Parent:
+
+```text
+Fee Details
+Pending Amount
+Payment History
+Pay Fee
+Receipt
+```
+
+Statuses:
+
+```text
+Pending
+Partial
+Paid
+Overdue
+Refunded
+```
+
+## 14. Exams & Results
+
+Admin:
+
+```text
+Create Exam
+Schedule
+Marks
+Results
+Report Cards
+```
+
+Teacher:
+
+```text
+Assigned Exams
+Marks Entry
+Performance
+```
+
+Parent:
+
+```text
+Schedule
+Marks
+Results
+Report Card
+Performance
+```
+
+Report cards must be printable/downloadable.
+
+## 15. Academic Modules
+
+Implement UI for:
+
+```text
+Academic Sessions
+Classes
+Sections
+Subjects
+Timetable
+Homework
+Assignments
+Study Material
+Lesson Plans
+```
+
+Teachers can create/upload relevant academic content for assigned classes and subjects.
+
+Parents can view content belonging to their child.
+
+## 16. Notices
+
+Admin can create:
+
+```text
+School
+Class
+Section
+Teacher
+Parent
+```
+
+Categories:
+
+```text
+General
+Attendance
+Fee
+Exam
+Homework
+Result
+Holiday
+Emergency
+```
+
+Support cards, tables, detail pages and notifications.
+
+## 17. Transport
+
+Admin:
+
+```text
+Vehicles
+Drivers
+Conductors
+Routes
+Stops
+Student Allocation
+```
+
+Parent:
+
+```text
+Bus
+Route
+Stop
+Pickup Time
+Drop Time
+```
+
+GPS tracking is future functionality.
+
+## 18. Library
+
+Admin:
+
+```text
+Books
+Authors
+Categories
+ISBN
+Quantity
+Issue
+Return
+Fine
+History
+```
+
+Parent can view linked child's library records.
+
+## 19. Documents
+
+Student:
+
+```text
+Birth Certificate
+Previous School Documents
+Transfer Certificate
+ID Documents
+Medical Documents
+Certificates
+```
+
+Teacher:
+
+```text
+Qualification
+ID Documents
+Experience Certificates
+Other Documents
+```
+
+Support:
+
+```text
+Upload
+Preview
+Download
+Delete
+```
+
+according to permissions.
+
+## 20. Notifications
+
+Top navbar notification bell:
+
+```text
+Unread Count
+List
+Mark Read
+Mark All Read
+View
+```
+
+Examples:
+
+```text
+Fee Payment
+Fee Reminder
+Attendance Alert
+Homework
+Exam Schedule
+Result
+School Notice
+Leave Update
+```
+
+## 21. Reports
+
+Admin reports:
+
+```text
+Student
+Attendance
+Fee
+Exam
+Teacher
+```
+
+Filters:
+
+```text
+Date/Range
+Class
+Section
+Teacher
+Student
+Status
+```
+
+Export:
+
+```text
+PDF
+Excel
+CSV
+```
+
+## 22. Reusable UI
+
+Create reusable:
+
+```text
+Button
+Input
+Select
+Textarea
+Modal
+Table
+Pagination
+Badge
+Card
+Loader
+Skeleton
+EmptyState
+ErrorState
+ConfirmDialog
+Toast
+Search
+Filter
+Dropdown
+DatePicker
+FileUploader
+```
+
+Do not duplicate UI unnecessarily.
+
+## 23. UI/UX
+
+Use:
+
+```text
+Tailwind CSS
+Lucide React
+Framer Motion
+```
+
+Design must be:
+
+```text
+Modern
+Clean
+Professional
+Minimal
+Accessible
+Fast
+Consistent
+Responsive
+```
+
+Use subtle animations for:
+
+```text
+Page transitions
+Modals
+Sidebar
+Dropdowns
+Cards
+Toasts
+```
+
+## 24. Responsive Design
+
+Support:
+
+```text
+320px, 375px, 425px
+768px
+1024px
+1280px
+1440px
+1920px
+```
+
+Desktop:
+
+```text
+Sidebar + Content
+```
+
+Tablet:
+
+```text
+Collapsible Sidebar + Content
+```
+
+Mobile:
+
+```text
+Hamburger → Slide-out Sidebar
+```
+
+No major horizontal overflow.
+
+Tables may use:
+
+```css
+overflow-x-auto
+```
+
+or responsive cards when appropriate.
+
+## 25. Forms & States
+
+All forms require:
+
+```text
+Validation
+Required indicators
+Errors
+Loading
+Success
+Disabled submit
+Duplicate-submit prevention
+```
+
+Avoid:
+
+```text
+Console errors
+Uncontrolled inputs
+Controlled/uncontrolled warnings
+Missing React keys
+```
+
+Every API screen must support:
+
+```text
+Loading
+Skeleton
+Error
+Empty State
+Success
+```
+
+Never show a blank page.
+
+## 26. API Services
+
+Centralize Axios in:
+
+```text
+src/services/api.js
+```
+
+Services:
+
+```text
+auth.api.js
+student.api.js
+teacher.api.js
+parent.api.js
+academic.api.js
+attendance.api.js
+teacherAttendance.api.js
+leave.api.js
+fee.api.js
+exam.api.js
+result.api.js
+timetable.api.js
+homework.api.js
+assignment.api.js
+studyMaterial.api.js
+lessonPlan.api.js
+notice.api.js
+transport.api.js
+library.api.js
+document.api.js
+notification.api.js
+report.api.js
+```
+
+Do not configure Axios separately inside components.
+
+## 27. Context & Hooks
+
+Contexts:
+
+```text
+AuthContext
+NotificationContext
+ThemeContext
+```
+
+AuthContext manages:
+
+```text
+Current User
+Role
+Authentication Status
+Login
+Logout
+Session Restore
+```
+
+Hook:
+
+```text
+useGeolocation.js
+```
+
+Provide:
+
+```text
+Request Location
+Latitude
+Longitude
+Accuracy
+Timestamp
+Loading
+Error
+Permission State
+```
+
+## 28. Environment
+
+`.env.example`:
+
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+Production:
+
+```env
+VITE_API_BASE_URL=https://your-backend-domain.com/api
+```
+
+Never expose:
+
+```text
+JWT_SECRET
+MongoDB credentials
+Private API secrets
+```
+
+in frontend environment variables.
+
+## 29. Development Order
+
+### Phase 1 — Foundation
+
+```text
+Vite
+Tailwind
+Global CSS
+Routing
+Common Components
+Layout
+Sidebar
+Navbar
+Toast
+Modal
+Loading/Empty/Error states
+```
+
+### Phase 2 — Authentication
+
+```text
+Login
+Role Selection
+Auth Context
+Protected Routes
+Admin/Teacher/Parent Routes
+Unauthorized
+```
+
+### Phase 3 — Admin
+
+```text
+Dashboard
+Students
+Teachers
+Parents
+Academics
+Attendance
+Fees
+Exams
+Results
+Timetable
+Homework
+Notices
+Transport
+Library
+Reports
+Audit Logs
+Settings
+```
+
+### Phase 4 — Teacher
+
+```text
+Dashboard
+Profile
+Self Attendance + Location
+Student Attendance
+Classes
+Subjects
+Homework
+Assignments
+Study Material
+Lesson Plans
+Exams
+Marks
+Timetable
+Leave
+Notices
+Notifications
+```
+
+### Phase 5 — Parent
+
+```text
+Dashboard
+Children
+Profile
+Attendance
+Homework
+Assignments
+Study Material
+Timetable
+Exams
+Results
+Fees
+Payments
+Notices
+Leave
+Transport
+Library
+Documents
+Notifications
+```
+
+### Phase 6 — Quality
+
+```text
+Responsive Testing
+API/Error Testing
+Permission Testing
+Form Validation
+Accessibility
+Performance
+Console Error Cleanup
+```
+
+## 30. Final Rules
+
+1. Create **only `frontend/`** in this phase.
+2. Keep `backend/` completely separate.
+3. Exactly **3 login roles: Admin, Teacher, Parent**.
+4. **Never create Student Login.**
+5. Students remain central data entities.
+6. Teacher self-attendance requires browser location.
+7. Teacher location currently allows **ANY LOCATION**; no geofencing.
+8. Send latitude, longitude, accuracy and timestamp to backend.
+9. Do not send teacher ID from frontend for self-attendance.
+10. Use reusable components and centralized API services.
+11. Do not create fake permanent functionality.
+12. All frontend APIs must be structured for real backend integration.
+13. Backend will independently enforce authentication and authorization.
+14. The application must be responsive and production-quality.
+15. No major console errors, warnings, broken routes or horizontal overflow.
+
+### Final Structure
+
+```text
+school-management-system/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── routes/
+│   │   ├── context/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── utils/
+│   │   ├── config/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── .env
+│   ├── .env.example
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── tailwind.config.js
+│   └── README.md
+└── backend/
+    └── Backend will be developed separately
+```
