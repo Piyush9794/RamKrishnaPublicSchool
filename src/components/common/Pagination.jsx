@@ -45,7 +45,7 @@ const Pagination = ({
         <span className="font-medium text-slate-700">{totalItems}</span> results
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2.5 sm:gap-4">
         {/* Page size selector */}
         {showPageSize && onPageSizeChange && (
           <div className="flex items-center gap-2">

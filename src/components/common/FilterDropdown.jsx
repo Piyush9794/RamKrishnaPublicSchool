@@ -53,7 +53,7 @@ const FilterDropdown = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full mt-1 left-0 z-30 min-w-[160px] bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden"
+            className="absolute top-full mt-1 right-0 sm:left-0 z-30 min-w-[160px] max-w-[calc(100vw-2rem)] bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden"
           >
             <div className="py-1">
               <button

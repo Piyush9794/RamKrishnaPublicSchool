@@ -48,7 +48,7 @@ const StudentsListPage = () => {
         subtitle={`${SAMPLE_STUDENTS.length} total students`}
         icon={<GraduationCap size={22} className="text-indigo-600" />}
         actions={
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => navigate('/admin/id-cards')}
               className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-sm font-semibold transition-colors shadow-xs"

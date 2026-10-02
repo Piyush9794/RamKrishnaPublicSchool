@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Plus, Search, Eye, Edit2, UserX, UserCheck, Mail, Phone, Download } from 'lucide-react';
 import PageHeader from '../../../components/common/PageHeader';
@@ -20,11 +21,27 @@ const SAMPLE_TEACHERS = Array.from({ length: 18 }, (_, i) => ({
 }));
 
 const TeachersListPage = () => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [teachersList, setTeachersList] = useState(SAMPLE_TEACHERS);
   const pageSize = 10;
 
-  const filtered = SAMPLE_TEACHERS.filter(t =>
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('rkps_custom_teachers');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setTeachersList([...parsed, ...SAMPLE_TEACHERS]);
+        }
+      }
+    } catch (e) {
+      console.error('Failed to parse rkps_custom_teachers', e);
+    }
+  }, []);
+
+  const filtered = teachersList.filter(t =>
     t.name.toLowerCase().includes(search.toLowerCase()) || t.employeeId.includes(search)
   );
   const totalPages = Math.ceil(filtered.length / pageSize);
@@ -34,9 +51,12 @@ const TeachersListPage = () => {
     <div className="space-y-5">
       <PageHeader
         title="Teachers"
-        subtitle={`${SAMPLE_TEACHERS.length} total staff`}
+        subtitle={`${teachersList.length} total staff`}
         actions={
-          <button className="inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold transition-colors shadow-sm">
+          <button
+            onClick={() => navigate('/admin/teachers/add')}
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold transition-colors shadow-sm cursor-pointer"
+          >
             <Plus size={16} /> Add Teacher
           </button>
         }

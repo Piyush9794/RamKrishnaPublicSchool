@@ -22,6 +22,7 @@ import AddStudentPage from '../pages/admin/students/AddStudentPage';
 import StudentDetailPage from '../pages/admin/students/StudentDetailPage';
 import IdCardDesignerPage from '../pages/admin/students/IdCardDesignerPage';
 import TeachersListPage from '../pages/admin/teachers/TeachersListPage';
+import AddTeacherPage from '../pages/admin/teachers/AddTeacherPage';
 import ParentsListPage from '../pages/admin/parents/ParentsListPage';
 import AcademicsPage from '../pages/admin/academics/AcademicsPage';
 import StudentAttendancePage from '../pages/admin/attendance/StudentAttendancePage';
@@ -111,6 +112,7 @@ const AppRoutes = () => {
         <Route path="students/:id" element={<StudentDetailPage />} />
         <Route path="id-cards" element={<IdCardDesignerPage />} />
         <Route path="teachers" element={<TeachersListPage />} />
+        <Route path="teachers/add" element={<AddTeacherPage />} />
         <Route path="parents" element={<ParentsListPage />} />
         <Route path="academics" element={<AcademicsPage />} />
         <Route path="attendance/students" element={<StudentAttendancePage />} />

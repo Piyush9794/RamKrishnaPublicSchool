@@ -378,7 +378,7 @@ const IdCardDesignerPage = () => {
 
         {/* Right Column: Live ID Card Preview */}
         <div className="lg:col-span-6 space-y-6 sticky top-24">
-          <div className="bg-slate-900 p-6 rounded-3xl text-white shadow-xl flex flex-col items-center justify-center space-y-6 min-h-[500px]">
+          <div className="bg-slate-900 p-3.5 sm:p-6 rounded-3xl text-white shadow-xl flex flex-col items-center justify-center space-y-6 min-h-[450px] sm:min-h-[500px] w-full overflow-x-auto">
             {/* Top Preview Controls */}
             <div className="w-full flex items-center justify-between border-b border-slate-800 pb-4">
               <div className="flex items-center gap-2">

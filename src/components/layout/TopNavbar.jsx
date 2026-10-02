@@ -98,7 +98,7 @@ const TopNavbar = ({ onMenuClick, title }) => {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 8, scale: 0.97 }}
                 transition={{ duration: 0.15 }}
-                className="absolute right-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden"
+                className="absolute -right-2 sm:right-0 top-full mt-2 w-[calc(100vw-2rem)] max-w-sm sm:w-80 bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden"
               >
                 <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100">
                   <h3 className="font-semibold text-slate-800 text-sm">Notifications</h3>

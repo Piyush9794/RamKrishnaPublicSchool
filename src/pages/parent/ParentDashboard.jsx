@@ -56,9 +56,9 @@ const ParentDashboard = () => {
           </div>
 
           {/* Child Selector */}
-          <div className="bg-white/15 backdrop-blur-md p-1.5 rounded-2xl border border-white/20 flex items-center gap-2">
+          <div className="bg-white/15 backdrop-blur-md p-1.5 rounded-2xl border border-white/20 flex flex-wrap items-center gap-2">
             <span className="text-xs font-semibold px-2 text-emerald-100">Select Child:</span>
-            <div className="flex gap-1">
+            <div className="flex flex-wrap gap-1">
               {CHILDREN.map((c) => (
                 <button
                   key={c.id}
@@ -78,32 +78,32 @@ const ParentDashboard = () => {
       </div>
 
       {/* Selected Child Summary Bar */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-4">
+      <div className="bg-white rounded-2xl border border-slate-200/80 p-5 sm:p-6 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex items-center gap-3.5 sm:gap-4 w-full md:w-auto">
           <Avatar name={child.name} size="lg" />
-          <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-slate-800">{child.name}</h2>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h2 className="text-lg sm:text-xl font-bold text-slate-800 truncate">{child.name}</h2>
               <Badge variant="emerald">{child.class}</Badge>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
               Roll No: <strong className="text-slate-600 font-mono">{child.rollNo}</strong> • Class Teacher: <strong className="text-slate-600">{child.classTeacher}</strong>
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 text-center w-full md:w-auto border-t md:border-t-0 border-slate-100 pt-4 md:pt-0">
-          <div className="px-4 py-2 bg-emerald-50 rounded-xl">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 text-center w-full md:w-auto border-t md:border-t-0 border-slate-100 pt-4 md:pt-0">
+          <div className="px-3 sm:px-4 py-2 bg-emerald-50 rounded-xl">
             <p className="text-xs font-semibold text-emerald-600">Attendance</p>
-            <p className="text-lg font-bold text-emerald-700">{child.attendancePct}%</p>
+            <p className="text-base sm:text-lg font-bold text-emerald-700">{child.attendancePct}%</p>
           </div>
-          <div className="px-4 py-2 bg-indigo-50 rounded-xl">
+          <div className="px-3 sm:px-4 py-2 bg-indigo-50 rounded-xl">
             <p className="text-xs font-semibold text-indigo-600">Class Rank</p>
-            <p className="text-lg font-bold text-indigo-700">{child.rank}</p>
+            <p className="text-base sm:text-lg font-bold text-indigo-700">{child.rank}</p>
           </div>
-          <div className="px-4 py-2 bg-amber-50 rounded-xl">
+          <div className="px-3 sm:px-4 py-2 bg-amber-50 rounded-xl">
             <p className="text-xs font-semibold text-amber-600">Pending Fees</p>
-            <p className="text-lg font-bold text-amber-700">{child.pendingFees}</p>
+            <p className="text-base sm:text-lg font-bold text-amber-700">{child.pendingFees}</p>
           </div>
         </div>
       </div>

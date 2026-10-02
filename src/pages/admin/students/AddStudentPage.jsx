@@ -187,11 +187,11 @@ const AddStudentPage = () => {
         </motion.div>
 
         {/* Footer Actions */}
-        <div className="flex justify-between mt-5">
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center sm:justify-between gap-3 mt-5">
           <button type="button" onClick={() => navigate('/admin/students')} className="px-5 py-2.5 border border-slate-200 rounded-xl text-sm text-slate-600 hover:bg-slate-50 transition-colors">
             Cancel
           </button>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             {activeTab !== TABS[TABS.length - 1] && (
               <button type="button" onClick={() => setActiveTab(TABS[TABS.indexOf(activeTab) + 1])} className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 rounded-xl text-sm font-medium text-slate-700 transition-colors">
                 Next →

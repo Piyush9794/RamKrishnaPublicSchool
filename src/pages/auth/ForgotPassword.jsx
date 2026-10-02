@@ -21,21 +21,22 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4 sm:p-6">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-            <GraduationCap size={32} className="text-white" />
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
+            <GraduationCap size={28} className="sm:hidden text-white" />
+            <GraduationCap size={32} className="hidden sm:block text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-900">Forgot Password?</h1>
-          <p className="text-slate-500 mt-1">We'll send you a reset link</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Forgot Password?</h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">We'll send you a reset link</p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200 p-8">
+        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200 p-5 sm:p-8">
           {sent ? (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
               <CheckCircle size={48} className="text-emerald-500 mx-auto mb-4" />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -16,11 +16,20 @@ const Login = () => {
   const [selectedRole, setSelectedRole] = useState(ROLES.ADMIN);
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
-  const { login } = useAuth();
+  const { login, user, isAuthenticated, getHomeRoute } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm();
+
+  // Redirect authenticated user to their role portal automatically
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      const fromPath = location.state?.from?.pathname;
+      const targetRoute = fromPath && fromPath.startsWith(`/${user.role}`) ? fromPath : getHomeRoute();
+      navigate(targetRoute, { replace: true });
+    }
+  }, [isAuthenticated, user, getHomeRoute, location, navigate]);
 
   const activeTab = ROLE_TABS.find(t => t.role === selectedRole);
 
@@ -33,9 +42,18 @@ const Login = () => {
   const onSubmit = async (data) => {
     setLoginError('');
     try {
-      const userData = await login({ ...data, role: selectedRole });
-      const from = location.state?.from?.pathname || ROLE_HOME_ROUTES[userData.role] || '/';
-      navigate(from, { replace: true });
+      // Determine role based on selected tab
+      const roleToUse = selectedRole;
+      const userData = await login({ ...data, role: roleToUse });
+
+      // Calculate appropriate home route for logged in role
+      const homeRoute = ROLE_HOME_ROUTES[userData.role] || '/';
+      const fromPath = location.state?.from?.pathname;
+
+      // Only redirect to fromPath if it matches the user's role namespace
+      const targetRoute = fromPath && fromPath.startsWith(`/${userData.role}`) ? fromPath : homeRoute;
+
+      navigate(targetRoute, { replace: true });
     } catch (err) {
       setLoginError(err?.response?.data?.message || 'Invalid credentials. Please try again.');
     }
@@ -82,7 +100,7 @@ const Login = () => {
       </div>
 
       {/* Right Panel - Login Form */}
-      <div className="flex-1 flex items-center justify-center p-6 bg-slate-50">
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 bg-slate-50">
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -90,19 +108,20 @@ const Login = () => {
           className="w-full max-w-md"
         >
           {/* Mobile Logo */}
-          <div className="lg:hidden text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg">
-              <GraduationCap size={32} className="text-white" />
+          <div className="lg:hidden text-center mb-6 sm:mb-8">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-indigo-600 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+              <GraduationCap size={28} className="sm:hidden text-white" />
+              <GraduationCap size={32} className="hidden sm:block text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900">School Management System</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">School Management System</h2>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-xl shadow-slate-200 p-8">
-            <h2 className="text-2xl font-bold text-slate-900 mb-1">Welcome back</h2>
-            <p className="text-slate-500 mb-6">Sign in to your account</p>
+          <div className="bg-white rounded-3xl shadow-xl shadow-slate-200 p-5 sm:p-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-1">Welcome back</h2>
+            <p className="text-slate-500 text-xs sm:text-sm mb-6">Sign in to your account</p>
 
             {/* Role Selector */}
-            <div className="flex gap-2 mb-6 p-1 bg-slate-100 rounded-2xl">
+            <div className="flex gap-1.5 sm:gap-2 mb-6 p-1 bg-slate-100 rounded-2xl">
               {ROLE_TABS.map(tab => {
                 const Icon = tab.icon;
                 const isActive = selectedRole === tab.role;
@@ -111,14 +130,13 @@ const Login = () => {
                     key={tab.role}
                     type="button"
                     onClick={() => handleRoleChange(tab.role)}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                      isActive
+                    className={`flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-2 sm:py-2.5 px-1 sm:px-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${isActive
                         ? `bg-gradient-to-r ${tab.color} text-white shadow-sm`
                         : 'text-slate-500 hover:text-slate-700'
-                    }`}
+                      }`}
                   >
-                    <Icon size={15} />
-                    {tab.label}
+                    <Icon size={14} className="shrink-0" />
+                    <span>{tab.label}</span>
                   </button>
                 );
               })}
@@ -157,11 +175,10 @@ const Login = () => {
                     id="email"
                     placeholder="you@school.edu"
                     autoComplete="email"
-                    className={`w-full pl-10 pr-4 py-3 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-1 ${
-                      errors.email
+                    className={`w-full pl-10 pr-4 py-3 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-1 ${errors.email
                         ? 'border-red-300 focus:ring-red-400 bg-red-50'
                         : 'border-slate-200 focus:ring-indigo-400 bg-white'
-                    }`}
+                      }`}
                   />
                 </div>
                 {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
@@ -183,11 +200,10 @@ const Login = () => {
                     id="password"
                     placeholder="••••••••"
                     autoComplete="current-password"
-                    className={`w-full pl-10 pr-11 py-3 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-1 ${
-                      errors.password
+                    className={`w-full pl-10 pr-11 py-3 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-1 ${errors.password
                         ? 'border-red-300 focus:ring-red-400 bg-red-50'
                         : 'border-slate-200 focus:ring-indigo-400 bg-white'
-                    }`}
+                      }`}
                   />
                   <button
                     type="button"

@@ -61,15 +61,25 @@ export const AuthProvider = ({ children }) => {
       userData = data.user;
     } catch (err) {
       // Standalone frontend fallback for demo testing
+      const email = credentials.email || `${credentials.role}@school.edu`;
+      let name = 'User';
+      if (credentials.role === ROLES.ADMIN) {
+        name = 'System Administrator';
+      } else if (credentials.role === ROLES.PARENT) {
+        name = 'Robert Wright';
+      } else {
+        // Teacher role — format name from email username
+        const username = email.split('@')[0];
+        name = username
+          .split('.')
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(' ');
+      }
+
       userData = {
-        id: `demo-${credentials.role}-01`,
-        name:
-          credentials.role === ROLES.ADMIN
-            ? 'System Administrator'
-            : credentials.role === ROLES.TEACHER
-            ? 'Sarah Jenkins'
-            : 'Robert Wright',
-        email: credentials.email || `${credentials.role}@school.edu`,
+        id: `demo-${credentials.role}-${Date.now()}`,
+        name: name || 'Teacher',
+        email,
         role: credentials.role,
         avatar: '',
       };

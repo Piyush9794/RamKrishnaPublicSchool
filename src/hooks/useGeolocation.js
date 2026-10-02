@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
+import { getAddressFromCoordinates } from '../utils/locationUtils';
 
 const GEOLOCATION_ERRORS = {
   1: {
@@ -61,13 +62,18 @@ const useGeolocation = () => {
       };
 
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const locationName = await getAddressFromCoordinates(lat, lng);
+
           const locationData = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
+            latitude: lat,
+            longitude: lng,
             accuracy: position.coords.accuracy,
             altitude: position.coords.altitude,
             locationTimestamp: new Date(position.timestamp).toISOString(),
+            locationName,
           };
           setLocation(locationData);
           setPermissionState('granted');
